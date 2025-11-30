@@ -1,0 +1,43 @@
+name: Kripto API Veri Güncelleyici
+
+on:
+  # Her 6 saatte bir çalıştır (Saat 00, 06, 12, 18'de)
+  schedule:
+    - cron: '0 0,6,12,18 * * *'
+  # Manuel çalıştırma butonu ekler
+  workflow_dispatch:
+
+jobs:
+  run_analysis_and_publish:
+    # Bu iş akışı Linux sanal makinesinde çalışacak
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Depoyu Çek (Checkout Repository)
+        # İş akışının deponun dosyalarına erişmesini sağlar
+        uses: actions/checkout@v4
+
+      - name: Python Ortamını Kur
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10' # Güvenilir bir Python sürümü
+
+      - name: Gerekli Kütüphaneleri Yükle
+        # Kök dizindeki requirements.txt dosyasını kullanır
+        run: pip install -r requirements.txt
+
+      - name: Python Betiğini Çalıştır ve JSON Oluştur
+        # sentiment_script.py dosyasını çalıştırır
+        # Bu betik, 'api_data/data.json' dosyasını oluşturmalıdır.
+        run: python sentiment_script.py
+        
+      - name: Sonuçları Depoya Geri Yükle (Commit)
+        # Oluşturulan api_data/data.json dosyasını otomatik olarak deponuza kaydeder
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          # Betik tarafından oluşturulan/güncellenen dosyanın yolu
+          files: api_data/data.json 
+          commit_message: 'API verisi güncellendi [Action]'
+          # GitHub Actions'ın kendi botu ile commit yap
+          committer: GitHub Actions <actions@github.com>
+          author: GitHub Actions <actions@github.com>
