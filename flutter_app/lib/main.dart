@@ -3,8 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 // ❗ API UÇ NOKTASI: Bu kısmı kendi GitHub RAW URL'nizle güncelleyin!
-// Örnek: https://raw.githubusercontent.com/KULLANICI_ADINIZ/DEPO_ADINIZ/main/api_data/data.json
-const String API_URL = 'YOUR_GITHUB_RAW_JSON_URL_HERE'; 
+const String API_URL = 'https://raw.githubusercontent.com/kingdraww/Kriptoduyarlilik/main/api_data/data.json';
 
 void main() {
   runApp(const CryptoSentimentApp());
