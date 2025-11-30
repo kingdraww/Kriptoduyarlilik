@@ -1,0 +1,32 @@
+name: kripto_duyarlilik_apk
+description: GitHub Actions API'sından veri çeken kripto duyarlılık takip uygulaması.
+
+# Proje sürümünü ve yapısını tanımlar
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0' # Kullandığınız Dart SDK sürümünü kontrol edin
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # API Verisini çekmek için gerekli olan HTTP paketi
+  http: ^1.1.0 
+  
+  # Uygulamanızın simgelerini kullanmak için (Varsayılan olarak Flutter ile gelir)
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+# Flutter'a projenin bileşenlerinin nerede olduğunu söyler
+flutter:
+  uses-material-design: true
+
+  # Eğer ileride uygulama içine resim/font eklemek isterseniz burayı kullanabilirsiniz
+  # assets:
+  #   - images/
